@@ -37,6 +37,17 @@ def handle_hello():
 
 
     return jsonify(response_body), 200
+@app.route('/member', methods= ['POST'])
+def handle_create():
+    miembro = {
+        "first_name" : request.json.get("first_name"),
+        "age" : request.json.get("age"),
+        "lucky_numbers" : request.json.get("lucky_numbers"),
+    }
+    response = jackson_family.add_member(miembro)
+    return jsonify(response)
+
+@app.route('/member/<int:id>')
 
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':
